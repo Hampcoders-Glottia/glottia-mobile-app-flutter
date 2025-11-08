@@ -8,6 +8,12 @@ import '../widgets/table_map_grid.dart';
 import '../widgets/table_legend.dart';
 import '../widgets/table_action_buttons.dart';
 
+// Importamos bloc
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Importamos el nuevo BLoC Y la pantalla
+import '../../reservations/bloc/new_reservation_bloc.dart';
+
 class TablesViewScreen extends StatefulWidget {
   const TablesViewScreen({super.key});
 
@@ -53,7 +59,13 @@ class _TablesViewScreenState extends State<TablesViewScreen> {
             children: [
               TableActionButtons(
                 onNewReservationPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const NewReservationScreen()));
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider(create: (context) => NewReservationBloc(),
+                      child: const NewReservationScreen(),
+                      )
+                    ));
                 },
               ),
               const TableSummaryCards(),
