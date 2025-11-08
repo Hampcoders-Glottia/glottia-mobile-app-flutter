@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:glottia_app/features/dashboard/view/dashboard_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'bloc/dashboard_bloc.dart';
 
 void main() {
@@ -24,6 +25,16 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.purple,
           scaffoldBackgroundColor: const Color(0xFFF5F5F5),
         ),
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('es'), // Español
+          Locale('en'), // Inglés (opcional)
+        ],
+        locale: const Locale('es'), // Forzar español
         // 4. Ahora, DashboardScreen es un descendiente del BlocProvider
         //    y podrá encontrar el BLoC sin problemas.
         home: const DashboardScreen(),

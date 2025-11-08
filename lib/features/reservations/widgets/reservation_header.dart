@@ -11,7 +11,7 @@ class ReservationHeader extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(8.0),
           child: Image.asset(
-            'assets/images/avatar_placeholder.png', // Usa tu imagen de placeholder
+            'assets/images/cafe.jpg',
             width: 60,
             height: 60,
             fit: BoxFit.cover,
