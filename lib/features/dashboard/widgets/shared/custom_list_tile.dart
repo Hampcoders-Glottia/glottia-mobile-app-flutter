@@ -7,6 +7,7 @@ class CustomListTile extends StatelessWidget {
   final Color iconBgColor;
   final Color iconColor;
   final bool showArrow;
+  final VoidCallback? onTap;
 
   const CustomListTile({
     Key? key,
@@ -16,6 +17,7 @@ class CustomListTile extends StatelessWidget {
     required this.iconBgColor,
     required this.iconColor,
     this.showArrow = true,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -40,9 +42,7 @@ class CustomListTile extends StatelessWidget {
       trailing: showArrow
           ? Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey[400])
           : null,
-      onTap: () {
-        // TODO: Manejar el tap, posiblemente pasando una función
-      },
+      onTap: onTap,
     );
   }
 }

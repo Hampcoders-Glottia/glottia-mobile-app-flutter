@@ -3,12 +3,14 @@ import 'shared/custom_list_tile.dart';
 import 'shared/list_section.dart';
 import '../../../theme/app_colors.dart';
 
+import '../../tables/view/tables_view_screen.dart';
+
 class ManagementList extends StatelessWidget {
   const ManagementList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const ListSection(
+    return ListSection(
       title: 'Gestion del Establecimiento',
       items: [
         CustomListTile(
@@ -31,6 +33,13 @@ class ManagementList extends StatelessWidget {
           icon: Icons.store_outlined,
           iconBgColor: Color(0xFFFFF3E0), // Naranja claro
           iconColor: Colors.orange,
+          onTap: () {
+            // Navegar a la pantalla de gestion de tablas
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const TablesViewScreen()),
+            );
+          },
         ),
         CustomListTile(
           title: 'Promociones',
