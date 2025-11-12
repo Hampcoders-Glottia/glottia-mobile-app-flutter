@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../theme/app_colors.dart';
+import '../../authentication/bloc/auth_bloc.dart';
+import '../../authentication/bloc/auth_event.dart';
+import '../../authentication/view/welcome_screen.dart';
 
 class DashboardHeader extends StatelessWidget {
   final String userName;
@@ -44,7 +48,51 @@ class DashboardHeader extends StatelessWidget {
           icon: Icon(Icons.notifications_outlined, color: kPrimaryPurple),
           onPressed: () {},
         ),
+        // Botón de cerrar sesión
+        IconButton(
+          icon: Icon(Icons.logout, color: Colors.redAccent),
+          tooltip: 'Cerrar sesión',
+          onPressed: () {
+            _showLogoutDialog(context);
+          },
+        ),
       ],
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: const Text('Cerrar Sesión'),
+          content: const Text('¿Estás seguro que deseas cerrar sesión?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancelar'),
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Cerrar Sesión', style: TextStyle(color: Colors.red)),
+              onPressed: () {
+                // Cerrar el diálogo
+                Navigator.of(dialogContext).pop();
+                
+                // Emitir evento de logout
+                context.read<AuthBloc>().add(LogoutRequested());
+                
+                // Navegar a WelcomeScreen
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_) => const WelcomeScreen()),
+                  (route) => false,
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
